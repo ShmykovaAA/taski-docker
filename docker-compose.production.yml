@@ -1,7 +1,6 @@
 volumes:
   pg_data_production:
   static_volume:
-
 services:
   db:
     image: postgres:13.10
@@ -9,18 +8,18 @@ services:
     volumes:
       - pg_data_production:/var/lib/postgresql/data
   backend:
-    image: anyashmykova/taski_backend # Качаем с Docker Hub
+    image: anyashmykova/taski_backend
     env_file: .env
     volumes:
       - static_volume:/backend_static
   frontend:
-    image: anyashmykova/taski_frontend  # Качаем с Docker Hub
+    image: anyashmykova/taski_frontend
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
   gateway:
-    image: anyashmykova/taski_gateway  # Качаем с Docker Hub
+    image: anyashmykova/taski_gateway
     env_file: .env
     volumes:
       - static_volume:/staticfiles/
